@@ -1,0 +1,44 @@
+bool isValidSudoku(vector<vector<char>>& arr){
+      // check row wise vectical
+        for(int i=0;i<9;i++){
+            int tmp[10]={0};     //storing 1,2,3,------,9
+            for(int j=0;j<9;j++){
+            if(arr[i][j]=='.')continue;
+            if(tmp[arr[i][j]-'0']!=0)return false;    //if any repeting value indicat nonzero value in tmp
+            tmp[arr[i][j]-'0']=1;      //put any value as your wish in tmp array 
+            }
+        }
+      //check col wise vertical
+         for(int j=0;j<9;j++){
+            int tmp[10]={0};
+            for(int i=0;i<9;i++){
+            if(arr[i][j]=='.')continue;
+            if(tmp[arr[i][j]-'0']!=0)return false;    
+            tmp[arr[i][j]-'0']=1;
+            }
+        }
+       //box wise
+        if(box(0,2,0,2,arr)==false)return false;
+        if(box(3,5,0,2,arr)==false)return false;   
+        if(box(6,8,0,2,arr)==false)return false;   
+        if(box(0,2,3,5,arr)==false)return false;   
+        if(box(3,5,3,5,arr)==false)return false;   
+        if(box(6,8,3,5,arr)==false)return false;   
+        if(box(0,2,6,8,arr)==false)return false;   
+        if(box(3,5,6,8,arr)==false)return false;   
+        if(box(6,8,6,8,arr)==false)return false;  
+        
+        //all condition fail so Sudoku is valid
+        return true;       
+    }
+    bool box(int p,int q,int l,int r,vector<vector<char>>& arr){
+           int tmp[10]={0};
+        for(int i=p;i<=q;i++){
+            for(int j=l;j<=r;j++){
+            if(arr[i][j]=='.')continue;
+            if(tmp[arr[i][j]-'0']!=0)return false;    
+            tmp[arr[i][j]-'0']=1;
+            }
+        }
+      return true;
+     } 
